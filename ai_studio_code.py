@@ -100,11 +100,10 @@ VALUES (?, ?, ?)
 
 conn.commit()
 conn.close()
-            st.success("Çözüm hazır!")
 
-            st.markdown("## 📚 Çözüm")
-
-            st.write(response.text)
+st.success("Çözüm hazır!")
+st.markdown("## 📚 Çözüm")
+st.write(response.text)
 elif sayfa == "Soru Depom":
     st.title("📚 Soru Depom")
 
