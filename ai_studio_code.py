@@ -4,7 +4,7 @@ import os
 from datetime import datetime
 from PIL import Image
 
-import streamlit as st
+import streamlit as st    
 import sqlite3
 import os
 from datetime import datetime
@@ -16,7 +16,7 @@ genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 model = genai.GenerativeModel("gemini-2.5-flash")
 
 # Veritabanı ve klasör kurulumları
-DB_FILE = "ders_takip.db"
+DB_FILE = "ders_takip.db  
 IMAGE_DIR = "yuklenen_sorular"
 
 if not os.path.exists(IMAGE_DIR):
@@ -81,14 +81,16 @@ def soru_sil(soru_id, gorsel_yolu):
 # Yapay Zeka Çözüm Simülasyonu
 # (Burayı isteğe bağlı olarak OpenAI veya Google Gemini API ile entegre edebilirsiniz)
 def yapay_zeka_cozum_uret(ders, konu):
-    cozumler = {
-        "Matematik": f"Soru Analizi: Bu bir {konu} sorusudur.\n\nÇözüm Adımları:\n1. Soruda verilen temel değişkenleri belirleyin.\n2. {konu} formüllerini uygulayın.\n3. İşlemleri sırasıyla gerçekleştirerek sonucu kontrol edin.",
-        "Fizik": f"Soru Analizi: Bu bir {konu} sorusudur.\n\nÇözüm Adımları:\n1. Serbest cisim diyagramı çizin ve kuvvetleri gösterin.\n2. Dinamik/kinematik denklemlerini yazın.\n3. Bilinmeyen değerleri çekerek sonuca ulaşın.",
-        "Kimya": f"Soru Analizi: Bu bir {konu} sorusudur.\n\nÇözüm Adımları:\n1. Verilen maddelerin mol sayılarını bulun.\n2. Kimyasal tepkime denklemini denkleştirin.\n3. Oran-orantı yöntemiyle istenen değeri hesaplayın.",
-        "Biyoloji": f"Soru Analizi: Bu bir {konu} sorusudur.\n\nÇözüm Adımları:\n1. İlgili biyolojik yapı veya süreci hatırlayın.\n2. Seçeneklerdeki kavramların tanımlarını gözden geçirin.\n3. Bilgi eşleştirmesi yaparak doğru şıkka ulaşın."
-    }
-    return cozumler.get(ders, f"Soru Analizi: {ders} - {konu}.\n\nÇözüm Adımları:\n1. Soruyu dikkatlice okuyup verileri listeleyin.\n2. Konuya uygun çözüm yöntemini belirleyin.\n3. Adım adım sonuca gidin.")
+    prompt = f"""
+    Ders: {ders}
+    Konu: {konu}
 
+    Bu konu için öğrencinin anlayabileceği şekilde detaylı çözüm ve açıklama yap.
+    """
+
+    response = model.generate_content(prompt)
+    return response.text
+    
 # Streamlit Arayüzü
 st.set_page_config(page_title="Ders ve Soru Takip Platformu", layout="wide")
 
