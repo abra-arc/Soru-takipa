@@ -39,9 +39,15 @@ st.set_page_config(
     layout="centered"
 )
 
+sayfa = st.sidebar.selectbox(
+    "Menü",
+    ["Soru Çöz", "Soru Depom"]
+)
+
 # Başlık
-st.title("🧠 AI Soru Çözücü")
-st.markdown(
+if sayfa == "Soru Çöz":
+    st.title("🧠 AI Soru Çözücü")
+    st.markdown(
     "Sorunun fotoğrafını yükle. Yapay zeka soruyu analiz edip çözsün."
 )
 
@@ -76,9 +82,50 @@ if uploaded_file:
             response = model.generate_content(
                 [prompt, image]
             )
+# Veritabanına kaydet
+conn = sqlite3.connect(DB_FILE)
+cursor = conn.cursor()
 
+tarih = datetime.now().strftime("%d.%m.%Y %H:%M")
+
+dosya_adi = f"{int(datetime.now().timestamp())}.png"
+dosya_yolu = os.path.join(IMAGE_DIR, dosya_adi)
+
+image.save(dosya_yolu)
+
+cursor.execute("""
+INSERT INTO sorular (gorsel_yolu, cozum_metni, tarih)
+VALUES (?, ?, ?)
+""", (dosya_yolu, response.text, tarih))
+
+conn.commit()
+conn.close()
             st.success("Çözüm hazır!")
 
             st.markdown("## 📚 Çözüm")
 
             st.write(response.text)
+elif sayfa == "Soru Depom":
+    st.title("📚 Soru Depom")
+
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM sorular ORDER BY id DESC")
+    sorular = cursor.fetchall()
+
+    conn.close()
+
+    if len(sorular) == 0:
+        st.info("Henüz kayıtlı soru yok.")
+    else:
+        for soru in sorular:
+            st.markdown("---")
+
+            if os.path.exists(soru[1]):
+                st.image(soru[1], width=250)
+
+            st.write("### Çözüm")
+            st.write(soru[2])
+
+            st.caption(soru[3])
