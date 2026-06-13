@@ -43,13 +43,8 @@ if uploaded_file:
             Bu görseldeki soruyu analiz et.
 
             Kurallar:
-
-            1. Soruyu önce aynen yaz.
-            2. Hangi derse ait olduğunu belirt.
-            3. Hangi konuya ait olduğunu belirt.
-            4. Adım adım çöz.
-            5. Sonucu açık şekilde ver.
-            6. Öğrencinin anlayabileceği basit bir dil kullan.
+            soruyu adım adım çöz en sonunda sorunun hangi derse ve konuya ait olduğunu nerelere dikkat edilmesi gerektiğini anlat ve bitir.
+            
             """
 
             response = model.generate_content(
