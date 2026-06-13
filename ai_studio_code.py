@@ -1,6 +1,29 @@
 import streamlit as st
 from PIL import Image
 import google.generativeai as genai
+import sqlite3
+from datetime import datetime
+import osDB_FILE = "sorular.db"
+IMAGE_DIR = "sorular"
+
+if not os.path.exists(IMAGE_DIR):
+    os.makedirs(IMAGE_DIR)def init_db():
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS sorular (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        gorsel_yolu TEXT,
+        cozum_metni TEXT,
+        tarih TEXT
+    )
+    """)
+
+    conn.commit()
+    conn.close()
+
+init_db()
 
 # Gemini
 genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
@@ -16,7 +39,7 @@ st.set_page_config(
 # Başlık
 st.title("🧠 AI Soru Çözücü")
 st.markdown(
-    "Sorunun fotoğrafını yükle. Yapay zeka soruyu analiz edip adım adım çözsün."
+    "Sorunun fotoğrafını yükle. Yapay zeka soruyu analiz edip çözsün."
 )
 
 # Dosya yükleme
