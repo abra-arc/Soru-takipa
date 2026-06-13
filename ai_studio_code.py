@@ -98,12 +98,17 @@ INSERT INTO sorular (gorsel_yolu, cozum_metni, tarih)
 VALUES (?, ?, ?)
 """, (dosya_yolu, response.text, tarih))
 
-conn.commit()
-conn.close()
+if st.button("🚀 Soruyu Çöz", use_container_width=True):
+    with st.spinner("Sorun analiz ediliyor..."):
 
-st.success("Çözüm hazır!")
-st.markdown("## 📚 Çözüm")
-st.write(response.text)
+        ...
+        conn.commit()
+        conn.close()
+
+        st.success("Çözüm hazır!")
+        st.markdown("## 📦 Çözüm")
+        st.write(response.text)
+
 elif sayfa == "Soru Depom":
     st.title("📚 Soru Depom")
 
