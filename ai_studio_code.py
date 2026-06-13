@@ -43,7 +43,7 @@ if uploaded_file:
             Bu görseldeki soruyu analiz et.
 
             Kurallar:
-            soruyu adım adım çöz en sonunda sorunun hangi derse ve konuya ait olduğunu nerelere dikkat edilmesi gerektiğini anlat ve bitir.
+            soruyu çöz başka hiçbirşey söyleme
             
             """
 
