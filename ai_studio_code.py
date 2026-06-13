@@ -4,6 +4,13 @@ import os
 from datetime import datetime
 from PIL import Image
 
+import google.generativeai as genai
+
+genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
+
+model =
+genai.GenerativeModel("gemini-2.5-flash")
+
 # Veritabanı ve klasör kurulumları
 DB_FILE = "ders_takip.db"
 IMAGE_DIR = "yuklenen_sorular"
