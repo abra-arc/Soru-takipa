@@ -16,7 +16,7 @@ genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 model = genai.GenerativeModel("gemini-2.5-flash")
 
 # Veritabanı ve klasör kurulumları
-DB_FILE = "ders_takip.db  
+DB_FILE = "ders_takip.db"  
 IMAGE_DIR = "yuklenen_sorular"
 
 if not os.path.exists(IMAGE_DIR):
