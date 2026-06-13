@@ -8,7 +8,9 @@ DB_FILE = "sorular.db"
 IMAGE_DIR = "sorular"
 
 if not os.path.exists(IMAGE_DIR):
-    os.makedirs(IMAGE_DIR)def init_db():
+    os.makedirs(IMAGE_DIR)
+    
+def init_db():
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
 
