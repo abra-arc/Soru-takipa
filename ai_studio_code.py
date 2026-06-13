@@ -3,7 +3,7 @@ from PIL import Image
 import google.generativeai as genai
 import sqlite3
 from datetime import datetime
-import osDB_FILE = "sorular.db"
+import os DB_FILE = "sorular.db"
 IMAGE_DIR = "sorular"
 
 if not os.path.exists(IMAGE_DIR):
