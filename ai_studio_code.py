@@ -38,10 +38,50 @@ model = genai.GenerativeModel("gemini-2.5-flash")
 
 # Sayfa
 st.set_page_config(
-    page_title="AI Soru Çözücü",
-    page_icon="🧠",
+    page_title="Akıllı Soru Asistanı",
+    page_icon="🎓",
     layout="centered"
 )
+st.markdown("""
+<style>
+
+.stApp {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+}
+
+[data-testid="stSidebar"] {
+    background: rgba(0,0,0,0.15);
+}
+
+h1 {
+    text-align: center;
+    color: white !important;
+}
+
+p {
+    color: white !important;
+}
+
+div.stButton > button {
+    width: 100%;
+    border-radius: 15px;
+    height: 55px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+}
+
+div.stButton > button:hover {
+    transform: scale(1.03);
+    transition: 0.2s;
+}
+
+[data-testid="stImage"] img {
+    border-radius: 15px;
+}
+
+</style>
+""", unsafe_allow_html=True)
 
 sayfa = st.sidebar.selectbox(
     "Menü",
