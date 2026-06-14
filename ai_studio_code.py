@@ -42,42 +42,92 @@ st.set_page_config(
     page_icon="🎓",
     layout="centered"
 )
+#uzay teması
 st.markdown("""
 <style>
 
+/* Uzay Teması */
 .stApp {
-    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    background: linear-gradient(
+        180deg,
+        #020617 0%,
+        #0f172a 50%,
+        #1e1b4b 100%
+    );
 }
 
-[data-testid="stSidebar"] {
-    background: rgba(0,0,0,0.15);
+/* Yıldızlar */
+.stApp::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-image:
+        radial-gradient(white 1px, transparent 1px),
+        radial-gradient(white 1px, transparent 1px),
+        radial-gradient(#93c5fd 1px, transparent 1px);
+
+    background-size:
+        50px 50px,
+        100px 100px,
+        150px 150px;
+
+    background-position:
+        0 0,
+        25px 25px,
+        75px 75px;
+
+    pointer-events: none;
+    z-index: -1;
 }
 
-h1 {
+/* Başlıklar */
+h1, h2, h3 {
+    color: white !important;
     text-align: center;
+}
+
+/* Yazılar */
+p, label, span {
     color: white !important;
 }
 
-p {
-    color: white !important;
+/* Sidebar */
+[data-testid="stSidebar"] {
+    background: rgba(15, 23, 42, 0.9);
 }
 
+/* Butonlar */
 div.stButton > button {
     width: 100%;
-    border-radius: 15px;
     height: 55px;
+    border-radius: 15px;
+
+    background: linear-gradient(
+        90deg,
+        #2563eb,
+        #7c3aed
+    );
+
+    color: white;
     font-size: 18px;
     font-weight: bold;
     border: none;
 }
 
+/* Buton Hover */
 div.stButton > button:hover {
     transform: scale(1.03);
     transition: 0.2s;
 }
 
+/* Resimler */
 [data-testid="stImage"] img {
-    border-radius: 15px;
+    border-radius: 20px;
+    border: 2px solid rgba(255,255,255,0.2);
 }
 
 </style>
