@@ -79,15 +79,6 @@ if uploaded_file:
             
             """
 
-            response = model.generate_content(
-                [prompt, image]
-            )
-# Veritabanına kaydet
-conn = sqlite3.connect(DB_FILE)
-cursor = conn.cursor()
-
-tarih = datetime.now().strftime("%d.%m.%Y %H:%M")
-
 dosya_adi = f"{int(datetime.now().timestamp())}.png"
 dosya_yolu = os.path.join(IMAGE_DIR, dosya_adi)
 
@@ -98,10 +89,30 @@ INSERT INTO sorular (gorsel_yolu, cozum_metni, tarih)
 VALUES (?, ?, ?)
 """, (dosya_yolu, response.text, tarih))
 
+            
+
 if st.button("🚀 Soruyu Çöz", use_container_width=True):
     with st.spinner("Sorun analiz ediliyor..."):
+        
+        response = model.generate_content(
+            [prompt, image]
+        )
 
-        ...
+        conn = sqlite3.connect(DB_FILE)
+        cursor = conn.cursor()
+
+        tarih = datetime.now().strftime("%d.%m.%Y %H:%M")
+
+        dosya_adi = f"{int(datetime.now().timestamp())}.png"
+        dosya_yolu = os.path.join(IMAGE_DIR, dosya_adi)
+
+        image.save(dosya_yolu)
+
+        cursor.execute("""
+        INSERT INTO sorular (gorsel_yolu, cozum_metni, tarih)
+        VALUES (?, ?, ?)
+        """, (dosya_yolu, response.text, tarih))
+        
         conn.commit()
         conn.close()
 
