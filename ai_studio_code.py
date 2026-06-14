@@ -208,14 +208,12 @@ Başka açıklama yapma.
                     [prompt, image]
                 )
                cevap = response.text
-
-ders = "Diğer"
-
-if "DERS:" in cevap:
-    try:
-        ders = cevap.split("DERS:")[1].split("\n")[0].strip()
-    except:
-        pass 
+            ders = "Diğer"
+            if "DERS:" in cevap:
+                try:
+                    ders = cevap.split("DERS:")[1].split("\n")[0].strip()
+                    except:
+                        pass 
                 
 
                 conn = sqlite3.connect(DB_FILE)
