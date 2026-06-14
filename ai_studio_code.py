@@ -208,7 +208,6 @@ Başka açıklama yapma.
 
 elif sayfa == "Soru Depom":
 
-```
 st.title("📚 Soru Depom")
 
 conn = sqlite3.connect(DB_FILE)
