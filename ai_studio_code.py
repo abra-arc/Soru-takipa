@@ -91,11 +91,11 @@ sayfa = st.sidebar.selectbox(
 
 if sayfa == "Soru Çöz":
 
-st.title("🌌 Nova AI")
-
-st.caption(
-    "Sorunu yükle, yapay zeka çözsün."
-)
+    st.title("🌌 Nova AI")
+    
+    st.caption(
+        "Sorunu yükle, yapay zeka çözsün."
+    )
 
 uploaded_file = st.file_uploader(
     "📸 Soru Yükle",
