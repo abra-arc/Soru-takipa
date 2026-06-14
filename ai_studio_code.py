@@ -217,24 +217,23 @@ if "DERS:" in cevap:
         ders = cevap.split("DERS:")[1].split("\n")[0].strip()
     except:
         pass
-                
-
-conn = sqlite3.connect(DB_FILE)
-cursor = conn.cursor()
-
-tarih = datetime.now().strftime(
+        
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+ 
+    tarih = datetime.now().strftime(
     "%d.%m.%Y %H:%M"
 )
 
-dosya_adi = f"{int(datetime.now().timestamp())}.png"
-dosya_yolu = os.path.join(
+    dosya_adi = f"{int(datetime.now().timestamp())}.png"
+    dosya_yolu = os.path.join(
     IMAGE_DIR,
     dosya_adi
 )
 
-image.save(dosya_yolu)
+    image.save(dosya_yolu)
 
-cursor.execute("""
+    cursor.execute("""
 INSERT INTO sorular
 (ders, gorsel_yolu, cozum_metni, tarih)
 VALUES (?, ?, ?, ?)
@@ -246,13 +245,16 @@ VALUES (?, ?, ?, ?)
     tarih
 ))
 
-conn.commit()
-conn.close()
+    conn.commit()
+    conn.close()
 
-st.success("Çözüm hazır!")
+    st.success("Çözüm hazır!")
 
-st.markdown("## 📦 Çözüm")
-st.write(response.text)
+    st.markdown("## 📦 Çözüm")
+    st.write(response.text)
+    
+                
+
 
 # ==========================
 # SORU DEPOM
