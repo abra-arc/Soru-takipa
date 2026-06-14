@@ -26,8 +26,8 @@ model = genai.GenerativeModel("gemini-2.5-flash")
 # =====================
 
 def init_db():
-    conn = sqlite3.connect(DB_FILE)
-    cursor = conn.cursor()
+conn = sqlite3.connect(DB_FILE)
+cursor = conn.cursor()
 
 ```
 cursor.execute("""
