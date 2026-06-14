@@ -225,48 +225,48 @@ elif sayfa == "Soru Depom":
     sorular = cursor.fetchall()
     
     conn.close()
+    
+    if not sorular:
 
-if not sorular:
-
-    st.info(
+        st.info(
         "Henüz kayıtlı soru yok."
     )
 
-else:
-
-    dersler = {}
-
-    for soru in sorular:
-
-        ders = soru[0]
-
-        if ders not in dersler:
-            dersler[ders] = []
-
-        dersler[ders].append(soru)
-
-    for ders_adi, liste in dersler.items():
-
-        with st.expander(
-            f"📂 {ders_adi} ({len(liste)})"
-        ):
-
-            for soru in liste:
-
-                if os.path.exists(
-                    soru[1]
-                ):
-                    st.image(
-                        soru[1],
-                        width=200
+    else:
+    
+        dersler = {}
+    
+        for soru in sorular:
+    
+            ders = soru[0]
+    
+            if ders not in dersler:
+                dersler[ders] = []
+    
+            dersler[ders].append(soru)
+    
+        for ders_adi, liste in dersler.items():
+    
+            with st.expander(
+                f"📂 {ders_adi} ({len(liste)})"
+            ):
+    
+                for soru in liste:
+    
+                    if os.path.exists(
+                        soru[1]
+                    ):
+                        st.image(
+                            soru[1],
+                            width=200
+                        )
+    
+                    st.write(
+                        soru[2]
                     )
-
-                st.write(
-                    soru[2]
-                )
-
-                st.caption(
-                    soru[3]
-                )
-
-                st.markdown("---")
+    
+                    st.caption(
+                        soru[3]
+                    )
+    
+                    st.markdown("---")
