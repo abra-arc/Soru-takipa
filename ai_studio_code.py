@@ -26,23 +26,22 @@ model = genai.GenerativeModel("gemini-2.5-flash")
 # =====================
 
 def init_db():
-conn = sqlite3.connect(DB_FILE)
-cursor = conn.cursor()
-
-```
-cursor.execute("""
-CREATE TABLE IF NOT EXISTS sorular (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    ders TEXT,
-    gorsel_yolu TEXT,
-    cozum_metni TEXT,
-    tarih TEXT
-)
-""")
-
-conn.commit()
-conn.close()
-```
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+    
+    ```
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS sorular (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        ders TEXT,
+        gorsel_yolu TEXT,
+        cozum_metni TEXT,
+        tarih TEXT
+    )
+    """)
+    
+    conn.commit()
+    conn.close()
 
 init_db()
 
