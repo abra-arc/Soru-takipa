@@ -81,9 +81,6 @@ if uploaded_file:
 
 dosya_adi = f"{int(datetime.now().timestamp())}.png"
 dosya_yolu = os.path.join(IMAGE_DIR, dosya_adi)
-
-if st.button("🚀 Soruyu Çöz", use_container_width=True):
-    with st.spinner("Sorun analiz ediliyor..."):
         
         response = model.generate_content(
             [prompt, image]
