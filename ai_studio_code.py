@@ -143,7 +143,7 @@ sayfa = st.sidebar.selectbox(
 # ==========================
 if sayfa == "Soru Çöz":
 
-    st.title("🧠 AI Soru Çözücü")
+    st.title("Artık Soeun Yok")
 
     st.markdown(
         "Sorunun fotoğrafını yükle. Yapay zeka soruyu analiz edip çözsün."
