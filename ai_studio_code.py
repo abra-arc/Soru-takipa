@@ -208,23 +208,23 @@ Başka açıklama yapma.
 
 elif sayfa == "Soru Depom":
 
-st.title("📚 Soru Depom")
-
-conn = sqlite3.connect(DB_FILE)
-cursor = conn.cursor()
-
-cursor.execute("""
-SELECT ders,
-       gorsel_yolu,
-       cozum_metni,
-       tarih
-FROM sorular
-ORDER BY id DESC
-""")
-
-sorular = cursor.fetchall()
-
-conn.close()
+    st.title("📚 Soru Depom")
+    
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+    
+    cursor.execute("""
+    SELECT ders,
+           gorsel_yolu,
+           cozum_metni,
+           tarih
+    FROM sorular
+    ORDER BY id DESC
+    """)
+    
+    sorular = cursor.fetchall()
+    
+    conn.close()
 
 if not sorular:
 
