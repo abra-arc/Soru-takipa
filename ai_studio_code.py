@@ -143,23 +143,13 @@ sayfa = st.sidebar.selectbox(
 # ==========================
 if sayfa == "Soru Çöz":
 
-    st.title("Artık Soeun Yok")
+    st.title("Artık Sorun Yok")
 
     st.markdown(
         "Sorunun fotoğrafını yükle. Yapay zeka soruyu analiz edip çözsün."
     )
 
-    ders = st.selectbox(
-        "📚 Ders Seç",
-        [
-            "Matematik",
-            "Türkçe",
-            "Fen Bilimleri",
-            "Sosyal Bilgiler",
-            "İngilizce",
-            "Diğer"
-        ]
-    )
+    
 
     uploaded_file = st.file_uploader(
         "📸 Soru Fotoğrafını Yükle",
@@ -185,17 +175,48 @@ if sayfa == "Soru Çöz":
             with st.spinner("Sorun analiz ediliyor..."):
 
                 prompt = """
-                Bu görseldeki soruyu analiz et.
+Bu görseldeki soruyu analiz et.
 
-                Kurallar:
-                - Soruyu çöz.
-                - Adım adım açıkla.
-                - Gereksiz konuşma yapma.
-                """
+Önce sorunun ait olduğu dersi veya alanı belirle.
 
+Cevabı şu formatta ver:
+
+DERS: [alan adı]
+
+ÇÖZÜM:
+[sorunun çözümü]
+
+Ders adını mümkün olduğunca spesifik yaz.
+Örneğin:
+- Matematik
+- Geometri
+- Fizik
+- Kimya
+- KPSS Tarih
+- KPSS Coğrafya
+- İngilizce
+- Programlama
+- Elektrik Elektronik
+- Muhasebe
+- Hukuk
+
+veya uygun gördüğün başka bir alan.
+
+Başka açıklama yapma.
+"""
                 response = model.generate_content(
                     [prompt, image]
                 )
+               cevap = response.text
+
+ders = "Diğer"
+
+if "DERS:" in cevap:
+    try:
+        ders = cevap.split("DERS:")[1].split("\n")[0].strip()
+    except:
+        pass 
+                
 
                 conn = sqlite3.connect(DB_FILE)
                 cursor = conn.cursor()
