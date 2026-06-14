@@ -5,11 +5,7 @@ import sqlite3
 from datetime import datetime
 import os
 
-# =====================
-
 # AYARLAR
-
-# =====================
 
 DB_FILE = "sorular.db"
 IMAGE_DIR = "sorular"
@@ -19,17 +15,12 @@ os.makedirs(IMAGE_DIR, exist_ok=True)
 genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 model = genai.GenerativeModel("gemini-2.5-flash")
 
-# =====================
-
 # VERİTABANI
-
-# =====================
 
 def init_db():
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
     
-    ```
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS sorular (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -45,11 +36,7 @@ def init_db():
 
 init_db()
 
-# =====================
-
 # SAYFA
-
-# =====================
 
 st.set_page_config(
 page_title="Nova AI",
@@ -57,11 +44,8 @@ page_icon="🌌",
 layout="centered"
 )
 
-# =====================
 
 # TEMA
-
-# =====================
 
 st.markdown("""
 
@@ -96,26 +80,17 @@ div.stButton > button{
 
 """, unsafe_allow_html=True)
 
-# =====================
-
-# MENÜ
-
-# =====================
+#MENU
 
 sayfa = st.sidebar.selectbox(
 "Menü",
 ["Soru Çöz", "Soru Depom"]
 )
 
-# =====================
-
-# SORU ÇÖZ
-
-# =====================
+#SORU ÇÖZ
 
 if sayfa == "Soru Çöz":
 
-```
 st.title("🌌 Nova AI")
 
 st.caption(
@@ -146,7 +121,6 @@ if uploaded_file:
         ):
 
             prompt = """
-```
 
 Bu görseldeki soruyu çöz.
 
@@ -161,8 +135,7 @@ DERS: ...
 
 Başka açıklama yapma.
 """
-
-```
+            
             response = model.generate_content(
                 [prompt, image]
             )
@@ -229,13 +202,9 @@ Başka açıklama yapma.
                 )
             else:
                 st.write(cevap)
-```
 
-# =====================
 
 # SORU DEPOM
-
-# =====================
 
 elif sayfa == "Soru Depom":
 
@@ -302,4 +271,3 @@ else:
                 )
 
                 st.markdown("---")
-```
