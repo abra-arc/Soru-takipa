@@ -212,46 +212,47 @@ Başka açıklama yapma.
 
 ders = "Diğer"
 
-if "DERS:" in cevap:
-    try:
-        ders = cevap.split("DERS:")[1].split("\n")[0].strip()
-    except:
-        pass
+    if "DERS:" in cevap:
+        try:
+            ders = cevap.split("DERS:")
+[1].split("\n")[0].strip()
+        except:
+            pass
         
-conn = sqlite3.connect(DB_FILE)
-cursor = conn.cursor()
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
 
-tarih = datetime.now().strftime(
-"%d.%m.%Y %H:%M"
-)
+    tarih = datetime.now().strftime(
+    "%d.%m.%Y %H:%M"
+    )
 
-dosya_adi = f"{int(datetime.now().timestamp())}.png"
-dosya_yolu = os.path.join(
-IMAGE_DIR,
-dosya_adi
-)
+    dosya_adi = f"{int(datetime.now().timestamp())}.png"
+    dosya_yolu = os.path.join(
+    IMAGE_DIR,
+    dosya_adi
+    )
 
-image.save(dosya_yolu)
+    image.save(dosya_yolu)
 
-cursor.execute("""
-INSERT INTO sorular
-(ders, gorsel_yolu, cozum_metni, tarih)
-VALUES (?, ?, ?, ?)
-""",
-(
+    cursor.execute("""
+    INSERT INTO sorular
+    (ders, gorsel_yolu, cozum_metni, tarih)
+    VALUES (?, ?, ?, ?)
+    """,
+    (
     ders,
     dosya_yolu,
     response.text,
     tarih
 ))
 
-conn.commit()
-conn.close()
-
-st.success("Çözüm hazır!")
-
-st.markdown("## 📦 Çözüm")
-st.write(response.text)
+    conn.commit()
+    conn.close()
+    
+    st.success("Çözüm hazır!")
+    
+    st.markdown("## 📦 Çözüm")
+    st.write(response.text)
     
                 
 
